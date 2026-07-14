@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ApiService } from '../../core/api.service';
 import { AuthService } from '../../core/auth.service';
+import { extractErrorMessage } from '../../core/error-utils';
 
 @Component({
   selector: 'app-signup-page',
@@ -28,7 +29,7 @@ export class SignupPage {
         this.auth.setToken(res.access_token);
         this.router.navigateByUrl('/apply');
       },
-      error: (err) => this.error.set(err?.error?.detail ?? 'Signup failed.'),
+      error: (err) => this.error.set(extractErrorMessage(err, 'Signup failed.')),
     });
   }
 }

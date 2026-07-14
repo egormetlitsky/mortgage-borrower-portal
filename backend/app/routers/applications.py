@@ -27,6 +27,19 @@ async def create_application(
     return application
 
 
+@router.get("", response_model=list[ApplicationResponse])
+async def list_applications(
+    borrower: Borrower = Depends(get_current_borrower),
+    db: AsyncSession = Depends(get_db),
+):
+    result = await db.execute(
+        select(Application)
+        .where(Application.borrower_id == borrower.id)
+        .order_by(Application.created_at.desc())
+    )
+    return result.scalars().all()
+
+
 @router.get("/{application_id}", response_model=ApplicationResponse)
 async def get_application(
     application_id: int,

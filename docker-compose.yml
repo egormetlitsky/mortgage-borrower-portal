@@ -1,0 +1,11 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/data:/app/data
+    environment:
+      - JWT_SECRET_KEY=dev-only-secret-change-in-prod

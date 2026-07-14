@@ -1,0 +1,15 @@
+<nav>
+  <a routerLink="/simulate">Simulate</a>
+  @if (auth.isAuthenticated()) {
+    <a routerLink="/apply">Apply</a>
+    <a routerLink="/upload">Upload</a>
+    <button type="button" (click)="auth.logout()">Log out</button>
+  } @else {
+    <a routerLink="/signup">Sign up</a>
+    <a routerLink="/login">Log in</a>
+  }
+</nav>
+
+<main>
+  <router-outlet />
+</main>

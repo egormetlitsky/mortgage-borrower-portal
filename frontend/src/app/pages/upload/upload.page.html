@@ -1,0 +1,34 @@
+<h2>Upload a Document</h2>
+
+<h3>Your applications</h3>
+@if (applications().length === 0) {
+  <p>No applications yet. <a routerLink="/apply">Start one</a>.</p>
+}
+<ul>
+  @for (app of applications(); track app.id) {
+    <li>
+      <button type="button" (click)="selectApplication(app.id)">
+        #{{ app.id }} — {{ app.full_name }} ({{ app.status }})
+      </button>
+      @if (applicationId() === app.id) {
+        <strong> [selected]</strong>
+      }
+    </li>
+  }
+</ul>
+
+@if (applicationId()) {
+  <h3>Upload to application #{{ applicationId() }}</h3>
+  <input type="file" (change)="onFileSelected($event)" />
+  <button type="button" (click)="upload()" [disabled]="uploading()">
+    {{ uploading() ? 'Uploading...' : 'Upload' }}
+  </button>
+}
+
+@if (uploaded(); as doc) {
+  <p class="success">Uploaded "{{ doc.filename }}" successfully.</p>
+}
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}

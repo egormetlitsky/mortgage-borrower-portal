@@ -1,0 +1,53 @@
+<h2>Mortgage Application</h2>
+<p>Step {{ step() }} of 3</p>
+
+<form (ngSubmit)="submit()">
+  @if (step() === 1) {
+    <label>
+      Full name
+      <input type="text" name="fullName" [(ngModel)]="fullName" required />
+    </label>
+  }
+
+  @if (step() === 2) {
+    <label>
+      Property value
+      <input type="number" name="propertyValue" [(ngModel)]="propertyValue" required />
+    </label>
+  }
+
+  @if (step() === 3) {
+    <label>
+      Monthly income
+      <input type="number" name="monthlyIncome" [(ngModel)]="monthlyIncome" required />
+    </label>
+
+    <label>
+      Loan amount
+      <input type="number" name="loanAmount" [(ngModel)]="loanAmount" required />
+    </label>
+
+    <label>
+      Term (years)
+      <input type="number" name="termYears" [(ngModel)]="termYears" required />
+    </label>
+  }
+
+  <div class="actions">
+    @if (step() > 1) {
+      <button type="button" (click)="back()">Back</button>
+    }
+
+    @if (step() < 3) {
+      <button type="button" (click)="next()">Next</button>
+    } @else {
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Submitting...' : 'Submit application' }}
+      </button>
+    }
+  </div>
+</form>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}

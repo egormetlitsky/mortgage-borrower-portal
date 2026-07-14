@@ -1,0 +1,32 @@
+<h2>Mortgage Simulation</h2>
+
+<form (ngSubmit)="submit()">
+  <label>
+    Loan amount
+    <input type="number" name="loanAmount" [(ngModel)]="loanAmount" required />
+  </label>
+
+  <label>
+    Annual interest rate (%)
+    <input type="number" step="0.01" name="interestRate" [(ngModel)]="interestRate" required />
+  </label>
+
+  <label>
+    Term (years)
+    <input type="number" name="termYears" [(ngModel)]="termYears" required />
+  </label>
+
+  <button type="submit">Simulate</button>
+</form>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (result(); as res) {
+  <div class="result">
+    <p>Monthly payment: {{ res.monthly_payment | number: '1.2-2' }}</p>
+    <p>Total paid: {{ res.total_paid | number: '1.2-2' }}</p>
+    <p>Total interest: {{ res.total_interest | number: '1.2-2' }}</p>
+  </div>
+}

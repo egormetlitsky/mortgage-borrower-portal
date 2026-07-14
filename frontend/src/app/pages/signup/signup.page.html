@@ -1,0 +1,21 @@
+<h2>Sign Up</h2>
+
+<form (ngSubmit)="submit()">
+  <label>
+    Email
+    <input type="email" name="email" [(ngModel)]="email" required />
+  </label>
+
+  <label>
+    Password
+    <input type="password" name="password" [(ngModel)]="password" required minlength="8" />
+  </label>
+
+  <button type="submit">Sign up</button>
+</form>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+<p>Already have an account? <a routerLink="/login">Log in</a></p>

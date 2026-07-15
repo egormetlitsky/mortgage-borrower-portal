@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import {
   Application,
   ApplicationCreate,
@@ -10,9 +11,7 @@ import {
   TokenResponse,
 } from './api.models';
 
-// Take-home simplification: hardcoded API base URL, no environment-specific
-// build config. A real app would use Angular's environment files instead.
-const API_BASE = 'http://localhost:8000';
+const API_BASE = environment.apiBase;
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
